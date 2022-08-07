@@ -1,6 +1,7 @@
 const ConsultasRepository = require('../repositories/ConsultasRepository');
 const UsersRepository = require('../repositories/UsersRepository');
 const AnimalsRepository = require('../repositories/AnimalsRepository');
+const { request } = require('express');
 
 class ConsultaController {
   async index(request, response) {
@@ -19,14 +20,29 @@ class ConsultaController {
     response.json(consulta);
   }
 
+  async showConsultasByUser(request, response){
+    const { id } = request.params;
+    const consultas = await ConsultasRepository.findByUser(id);
+
+    if (!consultas) {
+      return response.status(404).json({error: 'Consulta not found'})
+    }
+
+    response.json(consultas);
+  }
+
   async store (request, response) {
     //Criar novo registro
     const {
-      data_consulta, clinica, animal_id, users_id
+      data_consulta, hora_consulta, clinica, animal_id, users_id
     } = request.body;
 
     if (!data_consulta) {
       return response.status(400).json({ error: 'Data of consultation is required!' });
+    }
+
+    if (!hora_consulta) {
+      return response.status(400).json({ error: 'Hora da consulta não definido.' });
     }
 
     if (!clinica) {
@@ -51,8 +67,13 @@ class ConsultaController {
       return response.status(400).json({error: 'User does not exists.'})
     }
 
+    const consultaExists = await ConsultasRepository.findConsulta(data_consulta, clinica, hora_consulta);
+    if (consultaExists) {
+      return response.status(400).json({error: 'Já existe uma consulta para esse horário.'})
+    }
+
     const consulta = await ConsultasRepository.create({
-      data_consulta, clinica, animal_id, users_id
+      data_consulta, hora_consulta, clinica, animal_id, users_id
     });
 
     response.json(consulta);

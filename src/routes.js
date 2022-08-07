@@ -9,7 +9,11 @@ const router = Router();
 router.get('/users', UserController.index);
 router.get('/users/:id', UserController.show);
 router.post('/users', UserController.store);
+
+
 router.get('/users/animals/:id', AnimalController.showAnimalsByParent);
+router.get('/users/consultas/:id', ConsultaController.showConsultasByUser);
+
 
 router.get('/animals', AnimalController.index);
 router.get('/animals/:id', AnimalController.show);
