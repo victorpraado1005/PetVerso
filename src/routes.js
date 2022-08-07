@@ -14,8 +14,8 @@ router.get('/animals', AnimalController.index);
 router.get('/animals/:id', AnimalController.show);
 router.post('/animals', AnimalController.store);
 
-router.get('/consultas', ConsultaController.index);
-router.get('/consultas/:id', ConsultaController.show);
-router.post('/consultas', ConsultaController.store);
+router.get('/consulta', ConsultaController.index);
+router.get('/consulta/:id', ConsultaController.show);
+router.post('/consulta', ConsultaController.store);
 
 module.exports = router;
