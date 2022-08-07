@@ -10,9 +10,18 @@ class AnimalController {
   async show(request, response) {
     const { id } = request.params;
     const animal = await AnimalsRepository.findById(id);
-
     if (!animal) {
       return response.status(404).json({error: 'Animal not found'})
+    }
+
+    response.json(animal);
+  }
+
+  async showAnimalsByParent(request, response){
+    const { id } = request.params;
+    const animal = await AnimalsRepository.findByParent(id);
+    if (animal.length == 0) {
+      return response.status(404).json({error: 'Not animal found for this user.'})
     }
 
     response.json(animal);

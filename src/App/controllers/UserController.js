@@ -21,7 +21,7 @@ class UserController {
   async store (request, response) {
     //Criar novo registro
     const {
-      name, email, phone, address, cep, city, estado, gender, date_of_birth, animal_id
+      name, email, phone, address, cep, city, estado, gender, date_of_birth
     } = request.body;
 
     if (!name) {
@@ -29,7 +29,7 @@ class UserController {
     }
 
     const contact = await UsersRepository.create({
-      name, email, phone, address, cep, city, estado, gender, date_of_birth, animal_id
+      name, email, phone, address, cep, city, estado, gender, date_of_birth
     });
 
     response.json(contact);

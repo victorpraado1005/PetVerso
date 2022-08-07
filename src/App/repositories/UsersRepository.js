@@ -5,9 +5,8 @@ const db = require('../../database');
 class UsersRepository {
   async findAll() {
     const rows = await db.query(`
-    SELECT users.id, users.name, email, phone, animal.name AS animal_name, animal.id AS animal_id
+    SELECT users.id, users.name, email, phone
     FROM users
-    LEFT JOIN animal ON animal.id = animal_id
     `);
     return rows;
   }
@@ -21,13 +20,13 @@ class UsersRepository {
   }
 
   async create({
-    name, email, phone, address, cep, city, estado, gender, date_of_birth, animal_id
+    name, email, phone, address, cep, city, estado, gender, date_of_birth
   }) {
     const [ row ] = await db.query(`
-      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, date_of_birth, animal_id)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, date_of_birth)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING *
-    `, [name, email, phone, address, cep, city, estado, gender, date_of_birth, animal_id]);
+    `, [name, email, phone, address, cep, city, estado, gender, date_of_birth]);
 
     return row;
   }

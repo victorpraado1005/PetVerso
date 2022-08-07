@@ -5,16 +5,21 @@ const db = require('../../database');
 class ConsultasRepository {
   async findAll() {
     const rows = await db.query(`
-    SELECT *
+    SELECT consultas.id, consultas.data_consulta, consultas.clinica, animal.name AS animal_name, users.name AS user_name
     FROM consultas
+    LEFT JOIN animal ON animal.id = consultas.animal_id
+    LEFT JOIN users ON users.id = consultas.users_id
     `);
     return rows;
   }
 
   async findById(id) {
     const [ row ] = await db.query(`
-      SELECT * FROM consultas
-      WHERE id = $1
+    SELECT consultas.data_consulta, consultas.clinica, animal.name AS animal_name, users.name AS user_name
+    FROM consultas
+    LEFT JOIN animal ON animal.id = consultas.animal_id
+    LEFT JOIN users ON users.id = consultas.users_id
+    WHERE consultas.id = $1
     `, [ id ]);
     return row;
   }
