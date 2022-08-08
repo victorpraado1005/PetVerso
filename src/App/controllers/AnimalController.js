@@ -30,7 +30,7 @@ class AnimalController {
   async store (request, response) {
     //Criar novo registro
     const {
-      name, breed, date_of_birth, gender
+      name, breed, date_of_birth, gender, users_id
     } = request.body;
 
     if (!name) {
@@ -38,10 +38,33 @@ class AnimalController {
     }
 
     const animal = await AnimalsRepository.create({
+      name, breed, date_of_birth, gender, users_id
+    });
+
+    response.json(animal);
+  }
+
+  async update(request, response) {
+    const { id } = request.params;
+    const { name, breed,  date_of_birth, gender } = request.body;
+
+    const animalExists = await AnimalsRepository.findById(id);
+    if (!animalExists) {
+      return response.status(404).json({error: 'Animal not found'});
+    }
+
+    const animal = await AnimalsRepository.update(id, {
       name, breed, date_of_birth, gender
     });
 
     response.json(animal);
+  }
+
+  async delete(request, response) {
+    const { id } = request.params;
+    await AnimalsRepository.delete(id);
+
+    response.sendStatus(204);
   }
 }
 

@@ -17,6 +17,8 @@ router.get('/users/consultas/:id', ConsultaController.showConsultasByUser);
 
 router.get('/animals', AnimalController.index);
 router.get('/animals/:id', AnimalController.show);
+router.delete('/animals/:id', AnimalController.delete);
+router.put('/animals/:id', AnimalController.update);
 router.post('/animals', AnimalController.store);
 
 router.get('/consulta', ConsultaController.index);

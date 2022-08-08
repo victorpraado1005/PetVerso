@@ -7,7 +7,9 @@ CREATE TABLE IF NOT EXISTS animal (
   name VARCHAR NOT NULL,
   breed VARCHAR NOT NULL,
   date_of_birth DATE,
-  gender VARCHAR
+  gender VARCHAR,
+  users_id UUID,
+  FOREIGN KEY(users_id) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
@@ -20,14 +22,13 @@ CREATE TABLE IF NOT EXISTS users (
   city VARCHAR,
   estado VARCHAR,
   gender VARCHAR,
-  date_of_birth DATE,
-  animal_id UUID,
-  FOREIGN KEY(animal_id) REFERENCES animal(id)
+  date_of_birth DATE
 );
 
 CREATE TABLE IF NOT EXISTS consultas (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   data_consulta DATE NOT NULL,
+  hora_consulta TIME NOT NULL,
   clinica VARCHAR NOT NULL,
   animal_id UUID,
   users_id UUID,

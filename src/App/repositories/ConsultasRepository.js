@@ -30,7 +30,7 @@ class ConsultasRepository {
       FROM consultas
       LEFT JOIN animal ON animal.id = consultas.animal_id
       LEFT JOIN users ON users.id = consultas.users_id
-      WHERE users_id = $1
+      WHERE consultas.users_id = $1
     `, [ users_id ]);
 
     return rows;
