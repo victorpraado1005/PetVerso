@@ -49,6 +49,7 @@ class AnimalController {
     const { name, breed,  date_of_birth, gender } = request.body;
 
     const animalExists = await AnimalsRepository.findById(id);
+    console.log(animalExists);
     if (!animalExists) {
       return response.status(404).json({error: 'Animal not found'});
     }

@@ -13,7 +13,7 @@ class ConsultasRepository {
     return rows;
   }
 
-  async findById(id) {
+  async   findById(id) {
     const [ row ] = await db.query(`
     SELECT consultas.data_consulta, consultas.hora_consulta, consultas.clinica, animal.name AS animal_name, users.name AS user_name
     FROM consultas
@@ -58,6 +58,28 @@ class ConsultasRepository {
     `, [data_consulta, hora_consulta, clinica, animal_id, users_id]);
 
     return row;
+  }
+
+  async update(id, {
+    data_consulta, hora_consulta, clinica, animal_id, users_id
+  }) {
+    const [ row ] = await db.query(`
+      UPDATE consultas
+      SET data_consulta = $1, hora_consulta = $2, clinica = $3, animal_id = $4, users_id = $5
+      WHERE id = $6
+      RETURNING *
+    `, [ data_consulta, hora_consulta, clinica, animal_id, users_id, id ]);
+
+    return row
+  }
+
+  async delete(id){
+    const deleteOP = await db.query(`
+      DELETE FROM consultas
+      WHERE id = $1
+    `, [ id ]);
+
+    return deleteOP;
   }
 }
 

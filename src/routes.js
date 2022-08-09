@@ -24,5 +24,7 @@ router.post('/animals', AnimalController.store);
 router.get('/consulta', ConsultaController.index);
 router.get('/consulta/:id', ConsultaController.show);
 router.post('/consulta', ConsultaController.store);
+router.put('/consulta/:id', ConsultaController.update);
+router.delete('/consulta/:id', ConsultaController.delete);
 
 module.exports = router;

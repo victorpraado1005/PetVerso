@@ -20,15 +20,20 @@ class ConsultaController {
     response.json(consulta);
   }
 
-  async showConsultasByUser(request, response){
+  async showConsultasByUser(request, response) {
     const { id } = request.params;
-    const consultas = await ConsultasRepository.findByUser(id);
 
-    if (!consultas) {
-      return response.status(404).json({error: 'Consulta not found'})
+    const idExists = await UsersRepository.findById(id);
+    if (!idExists) {
+      return response.status(400).json('User not found');
     }
 
-    response.json(consultas);
+    const consulta = await ConsultasRepository.findByUser(id);
+    if (consulta.length == 0){
+      return response.status(400).json({error: 'Nenhuma consultada encontrada para esse usuário'});
+    }
+
+    response.json(consulta);
   }
 
   async store (request, response) {
@@ -77,6 +82,29 @@ class ConsultaController {
     });
 
     response.json(consulta);
+  }
+
+  async update(request, response) {
+    const { id } = request.params;
+    const { data_consulta, hora_consulta, clinica, animal_id, users_id } = request.body;
+
+    const consultaExists = await ConsultasRepository.findById(id);
+    if (!consultaExists){
+      return response.status(400).json({ error: 'Consulta não encontrada'});
+    }
+
+    const consulta = await ConsultasRepository.update(id, {
+      data_consulta, hora_consulta, clinica, animal_id, users_id
+    });
+
+    response.json(consulta);
+  }
+
+  async delete(request, response){
+    const { id } = request.params;
+    await ConsultasRepository.delete(id);
+
+    response.sendStatus(204);
   }
 }
 
