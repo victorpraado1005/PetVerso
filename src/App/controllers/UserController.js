@@ -34,6 +34,24 @@ class UserController {
 
     response.json(contact);
   }
+
+  async update(request, response) {
+    const { id } = request.params;
+    const {
+      name, email, phone, address, cep, city, estado, gender, date_of_birth
+    } = request.body;
+
+    const userExists = await UsersRepository.findById(id);
+    if (!userExists) {
+      return response.status(400).json({error: 'User not found'});
+    }
+
+    const user = await UsersRepository.update(id, {
+      name, email, phone, address, cep, city, estado, gender, date_of_birth
+    });
+
+    response.json(user);
+  }
 }
 
 // Singleton
