@@ -33,26 +33,26 @@ class AnimalsRepository {
   }
 
   async create({
-    name, breed, date_of_birth, gender, users_id
+    name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal
   }) {
     const [ row ] = await db.query(`
-      INSERT INTO animal(name, breed, date_of_birth, gender, users_id)
-      VALUES($1, $2, $3, $4, $5)
+      INSERT INTO animal(name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING *
-    `, [name, breed, date_of_birth, gender, users_id]);
+    `, [name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal]);
 
     return row;
   }
 
   async update(id, {
-    name, breed,  date_of_birth, gender
+    name, breed,  date_of_birth, gender, nickname, species, weight_animal, lenght_animal
   }) {
     const [row] = await db.query(`
       UPDATE animal
-      SET name = $1, breed = $2, date_of_birth = $3, gender = $4
+      SET name = $1, breed = $2, date_of_birth = $3, gender = $4, nickname = $5, species = $6, weight_animal = $7, lenght_animal = $8
       WHERE id = $5
       RETURNING *
-    `, [name, breed, date_of_birth, gender, id])
+    `, [name, breed, date_of_birth, gender, id, nickname, species, weight_animal, lenght_animal])
     return row;
   }
 

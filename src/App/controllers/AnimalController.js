@@ -30,7 +30,7 @@ class AnimalController {
   async store (request, response) {
     //Criar novo registro
     const {
-      name, breed, date_of_birth, gender, users_id
+      name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal
     } = request.body;
 
     if (!name) {
@@ -38,7 +38,7 @@ class AnimalController {
     }
 
     const animal = await AnimalsRepository.create({
-      name, breed, date_of_birth, gender, users_id
+      name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal
     });
 
     response.json(animal);
@@ -46,7 +46,7 @@ class AnimalController {
 
   async update(request, response) {
     const { id } = request.params;
-    const { name, breed,  date_of_birth, gender } = request.body;
+    const { name, breed,  date_of_birth, gender, nickname, species, weight_animal, lenght_animal } = request.body;
 
     const animalExists = await AnimalsRepository.findById(id);
     console.log(animalExists);
@@ -55,7 +55,7 @@ class AnimalController {
     }
 
     const animal = await AnimalsRepository.update(id, {
-      name, breed, date_of_birth, gender
+      name, breed, date_of_birth, gender, nickname, species, weight_animal, lenght_animal
     });
 
     response.json(animal);
