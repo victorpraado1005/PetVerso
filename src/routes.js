@@ -3,6 +3,7 @@ const { Router } = require('express');
 const UserController = require('./App/controllers/UserController');
 const AnimalController = require('./App/controllers/AnimalController');
 const ConsultaController = require('./App/controllers/ConsultaController');
+const ParkController = require('./App/controllers/ParkController');
 
 const router = Router();
 
@@ -27,5 +28,7 @@ router.get('/consulta/:id', ConsultaController.show);
 router.post('/consulta', ConsultaController.store);
 router.put('/consulta/:id', ConsultaController.update);
 router.delete('/consulta/:id', ConsultaController.delete);
+
+router.post('/park', ParkController.store);
 
 module.exports = router;
