@@ -29,6 +29,8 @@ router.post('/consulta', ConsultaController.store);
 router.put('/consulta/:id', ConsultaController.update);
 router.delete('/consulta/:id', ConsultaController.delete);
 
+router.get('/park', ParkController.index);
+router.get('/park/:district', ParkController.show);
 router.post('/park', ParkController.store);
 
 module.exports = router;

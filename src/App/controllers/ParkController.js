@@ -2,6 +2,23 @@ const ParksRepository = require('../repositories/ParksRepository');
 require('express-async-error');
 
 class ParkController {
+  async index (request, response) {
+    const parks = await ParksRepository.findAll();
+    response.json(parks);
+  }
+
+  async show(request, response) {
+    const { district } = request.params;
+
+    const parks = await ParksRepository.findByDistrict(district);
+
+    if (parks.length == 0) {
+      return response.status(400).json({error: 'Parks not found'})
+    }
+
+    response.json(parks);
+  }
+
   async store (request, response) {
     const { name,  address, zipcode, district, open_hours} = request.body;
 
