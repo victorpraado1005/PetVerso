@@ -38,3 +38,13 @@ CREATE TABLE IF NOT EXISTS consultas (
 
 INSERT INTO consultas(data_consulta, clinica, animal_id, users_id)
 VALUES('2022-08-08 15h', 'PetMais', 'bc808d4e-7e29-4859-8acf-9187ed13e36b', 'ab826ccc-4e8c-4c26-be88-b00290343a85');
+
+
+create table vaccines(
+	id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+	name VARCHAR NOT NULL,
+	application_date DATE NOT NULL,
+	next_application DATE,
+	animal_id UUID,
+	FOREIGN KEY(animal_id) REFERENCES animal(id)
+);
