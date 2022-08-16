@@ -25,7 +25,7 @@ class ConsultaController {
 
     const idExists = await UsersRepository.findById(id);
     if (!idExists) {
-      return response.status(400).json('User not found');
+      return response.status(400).json({error: 'User not found'});
     }
 
     const consulta = await ConsultasRepository.findByUser(id);
