@@ -1,4 +1,5 @@
 const AnimalsRepository = require('../repositories/AnimalsRepository');
+const UsersRepository = require('../repositories/UsersRepository');
 require('express-async-error');
 
 class AnimalController {
@@ -35,6 +36,23 @@ class AnimalController {
 
     if (!name) {
       return response.status(400).json({ error: 'Name is required!' });
+    }
+
+    if (!breed) {
+      return response.status(400).json({ error: 'Breed is required!' });
+    }
+
+    if (!users_id) {
+      return response.status(400).json({ error: 'Users Id is required!' });
+    }
+
+    const userExists = await UsersRepository.findById(users_id);
+    if(!userExists){
+      return response.status(400).json({ error: 'User not found' })
+    }
+
+    if (!species) {
+      return response.status(400).json({ error: 'Species is required!' });
     }
 
     const animal = await AnimalsRepository.create({
