@@ -4,6 +4,8 @@ const routes = require('./routes');
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(routes);
 //error handler
@@ -12,4 +14,4 @@ app.use((error, request, response, next) => {
   response.sendStatus(500);
 });
 
-app.listen(3000, () => console.log('Servidor rodando'));
+app.listen(port, () => console.log('Servidor rodando'));

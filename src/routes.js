@@ -9,6 +9,10 @@ const MedicationController = require('./App/controllers/MedicationController');
 
 const router = Router();
 
+router.get('/', function (req, res){
+  res.send("Olá, tamo no ar!");
+});
+
 //users
 router.get('/users', UserController.index);
 router.get('/users/:id', UserController.show);
