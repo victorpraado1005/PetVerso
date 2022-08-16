@@ -5,6 +5,7 @@ const AnimalController = require('./App/controllers/AnimalController');
 const ConsultaController = require('./App/controllers/ConsultaController');
 const ParkController = require('./App/controllers/ParkController');
 const VaccineController = require('./App/controllers/VaccineController');
+const MedicationController = require('./App/controllers/MedicationController');
 
 const router = Router();
 
@@ -42,5 +43,11 @@ router.get('/vaccines', VaccineController.index);
 router.get('/vaccines/:animal_id', VaccineController.show);
 router.post('/vaccines', VaccineController.store);
 router.delete('/vaccines/:id', VaccineController.delete);
+
+//medications
+router.get('/medication', MedicationController.index);
+router.get('/medication/:animal_id', MedicationController.show);
+router.post('/medication', MedicationController.store);
+router.delete('/medication/:id', MedicationController.delete);
 
 module.exports = router;

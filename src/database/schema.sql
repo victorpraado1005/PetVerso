@@ -48,3 +48,13 @@ create table vaccines(
 	animal_id UUID,
 	FOREIGN KEY(animal_id) REFERENCES animal(id)
 );
+
+create table medication(
+	id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+	medicine_name VARCHAR NOT NULL,
+	start_date DATE NOT NULL,
+	end_date DATE,
+	repetition VARCHAR,
+	animal_id UUID,
+	FOREIGN KEY(animal_id) REFERENCES animal(id)
+);
