@@ -1,4 +1,5 @@
 const MedicationsRepository = require('../repositories/MedicationsRepository');
+const AnimalsRepository = require('../repositories/AnimalsRepository');
 require('express-async-error');
 
 class MedicationController {
@@ -28,7 +29,29 @@ class MedicationController {
       return response.status(400).json({error: 'Application date is required'});
     }
 
+    const animalExists = await AnimalsRepository.findById(animal_id);
+    if (!animalExists) {
+      return response.status(400).json({error: 'Animal not found'});
+    }
+
     const medication = await MedicationsRepository.create({ medicine_name, start_date, end_date, repetition, animal_id });
+
+    response.json(medication);
+  }
+
+  async update(request, response) {
+    const { medication_id } = request.params;
+    const { medicine_name, start_date, end_date, repetition } = request.body;
+
+    const medicationExists = await MedicationsRepository.findById(medication_id);
+
+    if (!medicationExists) {
+      return response.status(404).json({error: 'Medication not found'});
+    }
+
+    const medication = await MedicationsRepository.update(medication_id, {
+      medicine_name, start_date, end_date, repetition
+    });
 
     response.json(medication);
   }

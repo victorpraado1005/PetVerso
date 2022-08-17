@@ -22,6 +22,15 @@ class MedicationsRepository {
     return rows;
   }
 
+  async findById(medication_id){
+    const [ row ] = await db.query(`
+      SELECT medication.id
+      FROM medication
+      WHERE medication.id = $1
+    `, [ medication_id ]);
+    return row;
+  }
+
   async create({
     medicine_name, start_date, end_date, repetition, animal_id
   }){
@@ -30,6 +39,18 @@ class MedicationsRepository {
       VALUES($1, $2, $3, $4, $5)
       RETURNING *
     `, [ medicine_name, start_date, end_date, repetition, animal_id ]);
+    return row;
+  }
+
+  async update(medication_id, {
+    medicine_name, start_date, end_date, repetition
+  }) {
+    const [row] = await db.query(`
+      UPDATE medication
+      SET medicine_name = $1, start_date = $2, end_date = $3, repetition = $4
+      WHERE medication.id = $5
+      RETURNING *
+    `, [medicine_name, start_date, end_date, repetition, medication_id])
     return row;
   }
 

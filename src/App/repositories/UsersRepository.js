@@ -19,6 +19,15 @@ class UsersRepository {
     return row;
   }
 
+  async findByEmail(email){
+    const [ row ] = await db.query(`
+      SELECT email
+      FROM users
+      WHERE email = $1
+    `, [ email ]);
+    return row;
+  }
+
   async create({
     name, email, phone, address, cep, city, estado, gender, date_of_birth
   }) {

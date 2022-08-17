@@ -28,6 +28,15 @@ class UserController {
       return response.status(400).json({ error: 'Name is required!' });
     }
 
+    if (!email){
+      return response.status(400).json({ error: 'Email is required!' });
+    }
+
+    const { emailExists } = await UsersRepository.findByEmail(email);
+    if (!emailExists){
+      return response.status(400).json({ error: 'This e-mail is already in use' });
+    }
+
     const contact = await UsersRepository.create({
       name, email, phone, address, cep, city, estado, gender, date_of_birth
     });
@@ -44,6 +53,11 @@ class UserController {
     const userExists = await UsersRepository.findById(id);
     if (!userExists) {
       return response.status(400).json({error: 'User not found'});
+    }
+
+    const { emailExists } = await UsersRepository.findByEmail(email);
+    if (!emailExists){
+      return response.status(400).json({ error: 'This e-mail is already in use' });
     }
 
     const user = await UsersRepository.update(id, {

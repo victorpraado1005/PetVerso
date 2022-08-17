@@ -1,4 +1,5 @@
 const VaccinesRepository = require('../repositories/VaccinesRepository');
+const AnimalsRepository = require('../repositories/AnimalsRepository');
 require('express-async-error');
 
 class VaccineController {
@@ -32,7 +33,29 @@ class VaccineController {
       return response.status(400).json({error: 'Animal Id is required'});
     }
 
+    const animalExists = await AnimalsRepository.findById(animal_id);
+    if (!animalExists) {
+      return response.status(400).json({error: 'Animal not found'});
+    }
+
     const vaccine = await VaccinesRepository.create({ name, application_date, next_application, animal_id });
+
+    response.json(vaccine);
+  }
+
+  async update(request, response) {
+    const { vaccine_id } = request.params;
+    const { name, application_date, next_application } = request.body;
+
+    const vaccineExists = await VaccinesRepository.findById(vaccine_id);
+
+    if (!vaccineExists) {
+      return response.status(404).json({error: 'Medication not found'});
+    }
+
+    const vaccine = await VaccinesRepository.update(vaccine_id, {
+      name, application_date, next_application
+    });
 
     response.json(vaccine);
   }

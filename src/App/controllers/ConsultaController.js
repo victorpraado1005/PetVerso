@@ -88,9 +88,24 @@ class ConsultaController {
     const { id } = request.params;
     const { data_consulta, hora_consulta, clinica, animal_id, users_id } = request.body;
 
+    const animalExists = await AnimalsRepository.findById(animal_id);
+    if(!animalExists){
+      return response.status(400).json({error: 'Animal does not exists.'})
+    }
+
+    const userExists = await UsersRepository.findById(users_id);
+    if(!userExists){
+      return response.status(400).json({error: 'User does not exists.'})
+    }
+
     const consultaExists = await ConsultasRepository.findById(id);
     if (!consultaExists){
       return response.status(400).json({ error: 'Consulta não encontrada'});
+    }
+
+    const availableTime = await ConsultasRepository.findConsulta(data_consulta, clinica, hora_consulta);
+    if (availableTime) {
+      return response.status(400).json({error: 'Já existe uma consulta para esse horário.'})
     }
 
     const consulta = await ConsultasRepository.update(id, {
