@@ -28,6 +28,15 @@ class UsersRepository {
     return row;
   }
 
+  async findUserByEmailAndPassword(email, password) {
+    const [ row ] = await db.query(`
+      SELECT *
+      FROM users
+      WHERE email = $1 AND password = $2
+    `, [ email, password ]);
+    return row;
+  }
+
   async create({
     name, email, phone, address, cep, city, estado, gender, date_of_birth
   }) {
