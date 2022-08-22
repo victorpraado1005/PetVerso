@@ -30,7 +30,7 @@ class UsersRepository {
 
   async findUserByEmailAndPassword(email, password) {
     const [ row ] = await db.query(`
-      SELECT *
+      SELECT id, name
       FROM users
       WHERE email = $1 AND password = $2
     `, [ email, password ]);
