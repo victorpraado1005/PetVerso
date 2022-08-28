@@ -24,7 +24,7 @@ class AnimalsRepository {
 
   async findByParent(parent){
     const row = await db.query(`
-      SELECT animal.id, animal.name, breed, animal.gender, users.name AS parent_name
+      SELECT animal.id, animal.name, breed, animal.gender, animal.species, animal.date_of_birth, users.name AS parent_name
       FROM animal
       LEFT JOIN users ON users.id = animal.users_id
       WHERE users.id = $1
