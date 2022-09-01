@@ -52,7 +52,7 @@ class UserController {
       name, email, phone, address, cep, city, estado, gender, date_of_birth
     });
 
-    response.json(contact);
+    response.status(201).json(contact);
   }
 
   async update(request, response) {

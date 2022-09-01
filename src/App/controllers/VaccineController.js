@@ -40,7 +40,7 @@ class VaccineController {
 
     const vaccine = await VaccinesRepository.create({ name, application_date, next_application, animal_id });
 
-    response.json(vaccine);
+    response.status(201).json(vaccine);
   }
 
   async update(request, response) {

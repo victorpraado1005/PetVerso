@@ -46,7 +46,7 @@ class ParkController {
       name,  address, zipcode, district, open_hours
     });
 
-    response.json(park);
+    response.status(201).json(park);
   }
 }
 

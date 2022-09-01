@@ -81,7 +81,7 @@ class ConsultaController {
       data_consulta, hora_consulta, clinica, animal_id, users_id
     });
 
-    response.json(consulta);
+    response.status(201).json(consulta);
   }
 
   async update(request, response) {

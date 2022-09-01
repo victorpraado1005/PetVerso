@@ -36,7 +36,7 @@ class MedicationController {
 
     const medication = await MedicationsRepository.create({ medicine_name, start_date, end_date, repetition, animal_id });
 
-    response.json(medication);
+    response.status(201).json(medication);
   }
 
   async update(request, response) {

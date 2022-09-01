@@ -59,7 +59,7 @@ class AnimalController {
       name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal
     });
 
-    response.json(animal);
+    response.status(201).json(animal);
   }
 
   async update(request, response) {
