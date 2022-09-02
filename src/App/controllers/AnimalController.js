@@ -42,6 +42,10 @@ class AnimalController {
       return response.status(400).json({ error: 'Breed is required!' });
     }
 
+    if (!gender) {
+      return response.status(400).json({ error: 'Gender is required!' });
+    }
+
     if (!users_id) {
       return response.status(400).json({ error: 'Users Id is required!' });
     }
@@ -53,6 +57,10 @@ class AnimalController {
 
     if (!species) {
       return response.status(400).json({ error: 'Species is required!' });
+    }
+
+    if (!date_of_birth) {
+      return response.status(400).json({ error: 'date of birth is required!' });
     }
 
     const animal = await AnimalsRepository.create({
@@ -69,6 +77,26 @@ class AnimalController {
     const animalExists = await AnimalsRepository.findById(id);
     if (!animalExists) {
       return response.status(404).json({error: 'Animal not found'});
+    }
+
+    if (!name) {
+      return response.status(400).json({ error: 'Name is required!' });
+    }
+
+    if (!breed) {
+      return response.status(400).json({ error: 'Breed is required!' });
+    }
+
+    if (!gender) {
+      return response.status(400).json({ error: 'Gender is required!' });
+    }
+
+    if (!species) {
+      return response.status(400).json({ error: 'Species is required!' });
+    }
+
+    if (!date_of_birth) {
+      return response.status(400).json({ error: 'date of birth is required!' });
     }
 
     const animal = await AnimalsRepository.update(id, {

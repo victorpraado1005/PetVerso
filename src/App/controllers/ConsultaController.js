@@ -58,13 +58,13 @@ class ConsultaController {
       return response.status(400).json({ error: 'Animal ID is required!' });
     }
 
-    if (!users_id) {
-      return response.status(400).json({ error: 'User ID is required!' });
-    }
-
     const animalExists = await AnimalsRepository.findById(animal_id);
     if(!animalExists){
       return response.status(400).json({error: 'Animal does not exists.'})
+    }
+
+    if (!users_id) {
+      return response.status(400).json({ error: 'User ID is required!' });
     }
 
     const userExists = await UsersRepository.findById(users_id);
@@ -87,16 +87,6 @@ class ConsultaController {
   async update(request, response) {
     const { id } = request.params;
     const { data_consulta, hora_consulta, clinica, animal_id, users_id } = request.body;
-
-    const animalExists = await AnimalsRepository.findById(animal_id);
-    if(!animalExists){
-      return response.status(400).json({error: 'Animal does not exists.'})
-    }
-
-    const userExists = await UsersRepository.findById(users_id);
-    if(!userExists){
-      return response.status(400).json({error: 'User does not exists.'})
-    }
 
     const consultaExists = await ConsultasRepository.findById(id);
     if (!consultaExists){
