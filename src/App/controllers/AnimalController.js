@@ -59,10 +59,6 @@ class AnimalController {
       return response.status(400).json({ error: 'Species is required!' });
     }
 
-    if (!date_of_birth) {
-      return response.status(400).json({ error: 'date of birth is required!' });
-    }
-
     const animal = await AnimalsRepository.create({
       name, breed, date_of_birth, gender, users_id, nickname, species, weight_animal, lenght_animal
     });
