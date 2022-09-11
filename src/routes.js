@@ -31,6 +31,10 @@ router.delete('/animals/:id', AnimalController.delete);
 router.put('/animals/:id', AnimalController.update);
 router.post('/animals', AnimalController.store);
 
+//rota de informacao de animal/medicamento relacionado ao animal
+router.get('/animals/vaccines/:animal_id', VaccineController.showByAnimalId);
+router.get('/animals/medication/:animal_id', MedicationController.showByAnimalId);
+
 //consultas
 router.get('/consulta', ConsultaController.index);
 router.get('/consulta/:id', ConsultaController.show);
@@ -46,15 +50,13 @@ router.post('/park', ParkController.store);
 //vaccines
 router.get('/vaccines', VaccineController.index);
 router.get('/vaccines/:id', VaccineController.show);
-router.get('/vaccines/:animal_id', VaccineController.showByAnimalId);
 router.post('/vaccines', VaccineController.store);
 router.put('/vaccines/:vaccine_id', VaccineController.update);
 router.delete('/vaccines/:id', VaccineController.delete);
 
 //medications
 router.get('/medication', MedicationController.index);
-router.get('/medication', MedicationController.show);
-router.get('/medication/:animal_id', MedicationController.showByAnimalId);
+router.get('/medication/:id', MedicationController.show);
 router.post('/medication', MedicationController.store);
 router.put('/medication/:medication_id', MedicationController.update);
 router.delete('/medication/:id', MedicationController.delete);
