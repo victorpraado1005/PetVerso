@@ -45,14 +45,16 @@ router.post('/park', ParkController.store);
 
 //vaccines
 router.get('/vaccines', VaccineController.index);
-router.get('/vaccines/:animal_id', VaccineController.show);
+router.get('/vaccines/:id', VaccineController.show);
+router.get('/vaccines/:animal_id', VaccineController.showByAnimalId);
 router.post('/vaccines', VaccineController.store);
 router.put('/vaccines/:vaccine_id', VaccineController.update);
 router.delete('/vaccines/:id', VaccineController.delete);
 
 //medications
 router.get('/medication', MedicationController.index);
-router.get('/medication/:animal_id', MedicationController.show);
+router.get('/medication', MedicationController.show);
+router.get('/medication/:animal_id', MedicationController.showByAnimalId);
 router.post('/medication', MedicationController.store);
 router.put('/medication/:medication_id', MedicationController.update);
 router.delete('/medication/:id', MedicationController.delete);

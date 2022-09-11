@@ -9,6 +9,16 @@ class MedicationController {
   }
 
   async show(request, response){
+    const { id } = request.params
+    const medication = await MedicationsRepository.findById(id);
+
+    if(!medication){
+      return response.status(400).json({error: 'Medicamento nao encontrado'});
+    }
+    response.json(medication);
+  }
+
+  async showByAnimalId(request, response){
     const { animal_id } = request.params
     const medications = await MedicationsRepository.findByAnimalId(animal_id);
 

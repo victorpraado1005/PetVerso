@@ -27,7 +27,7 @@ class VaccinesRepository {
 
   async findById(vaccine_id){
     const [ row ] = await db.query(`
-      SELECT vaccines.id
+      SELECT *
       FROM vaccines
       WHERE id = $1
     `, [ vaccine_id ]);

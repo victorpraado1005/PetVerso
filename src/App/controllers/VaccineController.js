@@ -9,11 +9,21 @@ class VaccineController {
   }
 
   async show(request, response){
+    const { id } = request.params
+    const vaccine = await VaccinesRepository.findById(id);
+
+    if(!vaccine){
+      return response.status(400).json({error: 'Vaccine not found'});
+    }
+    response.json(vaccine);
+  }
+
+  async showByAnimalId(request, response){
     const { animal_id } = request.params
     const vaccines = await VaccinesRepository.findByAnimalId(animal_id);
 
     if(vaccines.length == 0){
-      return response.status(400).json({error: 'Sem vacinas encontrada para esse animal'});
+      return response.status(400).json({error: 'Sem vacinas encontrados para esse animal'});
     }
     response.json(vaccines);
   }
