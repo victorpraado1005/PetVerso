@@ -16,7 +16,7 @@ class VaccinesRepository {
 
   async findByAnimalId(id){
     const rows = await db.query(`
-      SELECT vaccines.name, vaccines.application_date, vaccines.next_application,
+      SELECT vaccines.id, vaccines.name, vaccines.application_date, vaccines.next_application,
       animal.name AS animal_name
       FROM vaccines
       LEFT JOIN animal ON animal.id = vaccines.animal_id
