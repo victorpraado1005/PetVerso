@@ -14,7 +14,7 @@ class MedicationsRepository {
 
   async findByAnimalId(id){
     const rows = await db.query(`
-      SELECT medicine_name, start_date, end_date, repetition, animal.name AS animal_name
+      SELECT medication.id, medicine_name, start_date, end_date, repetition, animal.name AS animal_name
       FROM medication
       LEFT JOIN animal ON animal.id = medication.animal_id
       WHERE animal_id = $1
