@@ -3,6 +3,7 @@ const { Router } = require('express');
 const UserController = require('./App/controllers/UserController');
 const AnimalController = require('./App/controllers/AnimalController');
 const ConsultaController = require('./App/controllers/ConsultaController');
+const BanhoController = require('./App/controllers/BanhoController');
 const ParkController = require('./App/controllers/ParkController');
 const VaccineController = require('./App/controllers/VaccineController');
 const MedicationController = require('./App/controllers/MedicationController');
@@ -23,6 +24,7 @@ router.put('/users/:id', UserController.update);
 //informações dos animais relacionados a um usuário
 router.get('/users/animals/:id', AnimalController.showAnimalsByParent);
 router.get('/users/consultas/:id', ConsultaController.showConsultasByUser);
+router.get('/users/banhos/:id', BanhoController.showBanhosByUser);
 
 //animals
 router.get('/animals', AnimalController.index);
@@ -41,6 +43,13 @@ router.get('/consulta/:id', ConsultaController.show);
 router.post('/consulta', ConsultaController.store);
 router.put('/consulta/:id', ConsultaController.update);
 router.delete('/consulta/:id', ConsultaController.delete);
+
+//banhos
+router.get('/banho', BanhoController.index);
+router.get('/banho/:id', BanhoController.show);
+router.post('/banho', BanhoController.store);
+router.put('/banho/:id', BanhoController.update);
+router.delete('/banho/:id', BanhoController.delete);
 
 //parks
 router.get('/park', ParkController.index);
