@@ -72,8 +72,8 @@ class BanhoController {
       return response.status(400).json({error: 'User does not exists.'})
     }
 
-    const banhoExists = await BanhosRepository.findBanho(data_banho, hora_banho, petshop);
-    if (banhoExists) {
+    const banhoExists = await BanhosRepository.findBanho(data_banho, petshop, hora_banho);
+    if (banhoExists.length > 0) {
       return response.status(400).json({error: 'Já existe um banho para esse horário.'})
     }
 
