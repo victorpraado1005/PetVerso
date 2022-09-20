@@ -73,7 +73,7 @@ class BanhoController {
     }
 
     const banhoExists = await BanhosRepository.findBanho(data_banho, petshop, hora_banho);
-    if (banhoExists.length > 0) {
+    if (banhoExists) {
       return response.status(400).json({error: 'Já existe um banho para esse horário.'})
     }
 
