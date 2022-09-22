@@ -29,7 +29,7 @@ class PedidoController {
   }
 
   async store(request, response){
-    const { data_pedido, loja, valor_total, user_id } = request.body;
+    const { data_pedido, loja, valor_total, status, user_id } = request.body;
 
     if(!data_pedido){
       return response.status(400).json({error: 'Data is required'});
@@ -52,7 +52,7 @@ class PedidoController {
       return response.status(400).json({error: 'User not found'});
     }
 
-    const pedido = await PedidosRepository.create({ data_pedido, loja, valor_total, user_id });
+    const pedido = await PedidosRepository.create({ data_pedido, loja, valor_total, status, user_id });
 
     response.status(201).json(pedido);
   }

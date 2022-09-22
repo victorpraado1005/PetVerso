@@ -5,7 +5,7 @@ const db = require('../../database');
 class MedicationsRepository {
   async findAll(){
     const rows = await db.query(`
-      SELECT pedidos.id, data_pedido, loja, valor_total, users.name AS users_name
+      SELECT pedidos.id, data_pedido, loja, valor_total, status, users.name AS users_name
       FROM pedidos
       LEFT JOIN users ON users.id = pedidos.user_id
     `);
@@ -14,7 +14,7 @@ class MedicationsRepository {
 
   async findByUserId(id){
     const rows = await db.query(`
-      SELECT pedidos.id, data_pedido, loja, valor_total, users.name AS users_name
+      SELECT pedidos.id, data_pedido, loja, valor_total, status, users.name AS users_name
       FROM pedidos
       LEFT JOIN users ON users.id = pedidos.user_id
       WHERE user_id = $1
@@ -24,7 +24,7 @@ class MedicationsRepository {
 
   async findById(pedidoId){
     const [ row ] = await db.query(`
-      SELECT pedidos.id
+      SELECT *
       FROM pedidos
       WHERE pedidos.id = $1
     `, [ pedidoId ]);
@@ -32,13 +32,13 @@ class MedicationsRepository {
   }
 
   async create({
-    data_pedido, loja, valor_total, user_id
+    data_pedido, loja, valor_total, status, user_id
   }){
     const [ row ] = await db.query(`
-      INSERT INTO pedidos(data_pedido, loja, valor_total, user_id)
-      VALUES($1, $2, $3, $4)
+      INSERT INTO pedidos(data_pedido, loja, valor_total, status, user_id)
+      VALUES($1, $2, $3, $4, $5)
       RETURNING *
-    `, [ data_pedido, loja, valor_total, user_id ]);
+    `, [ data_pedido, loja, valor_total, status, user_id ]);
     return row;
   }
 }

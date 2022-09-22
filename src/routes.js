@@ -73,8 +73,8 @@ router.put('/medication/:medication_id', MedicationController.update);
 router.delete('/medication/:id', MedicationController.delete);
 
 //pedidos
-router.get('/pedidos', MedicationController.index);
-router.get('/pedidos/:id', MedicationController.show);
-router.post('/pedidos', MedicationController.store);
+router.get('/pedidos', PedidoController.index);
+router.get('/pedidos/:id', PedidoController.show);
+router.post('/pedidos', PedidoController.store);
 
 module.exports = router;
