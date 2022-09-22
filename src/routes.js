@@ -7,6 +7,7 @@ const BanhoController = require('./App/controllers/BanhoController');
 const ParkController = require('./App/controllers/ParkController');
 const VaccineController = require('./App/controllers/VaccineController');
 const MedicationController = require('./App/controllers/MedicationController');
+const PedidoController = require('./App/controllers/PedidoController');
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.put('/users/:id', UserController.update);
 router.get('/users/animals/:id', AnimalController.showAnimalsByParent);
 router.get('/users/consultas/:id', ConsultaController.showConsultasByUser);
 router.get('/users/banhos/:id', BanhoController.showBanhosByUser);
+router.get('/users/pedidos/:user_id', PedidoController.showByUserId);
 
 //animals
 router.get('/animals', AnimalController.index);
@@ -69,5 +71,10 @@ router.get('/medication/:id', MedicationController.show);
 router.post('/medication', MedicationController.store);
 router.put('/medication/:medication_id', MedicationController.update);
 router.delete('/medication/:id', MedicationController.delete);
+
+//pedidos
+router.get('/pedidos', MedicationController.index);
+router.get('/pedidos/:id', MedicationController.show);
+router.post('/pedidos', MedicationController.store);
 
 module.exports = router;
