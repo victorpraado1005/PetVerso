@@ -94,10 +94,6 @@ class UserController {
       return response.status(400).json({ error: 'Gender is required!' });
     }
 
-    if (!date_of_birth){
-      return response.status(400).json({ error: 'Date of birth is required!' });
-    }
-
     const user = await UsersRepository.update(id, {
       name, email, phone, address, cep, city, estado, gender, date_of_birth
     });
