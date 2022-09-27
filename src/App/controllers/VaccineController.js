@@ -77,6 +77,14 @@ class VaccineController {
 
     response.sendStatus(204);
   }
+
+  async deleteByAnimalId(request, response){
+    const { animal_id } = request.params;
+
+    await VaccinesRepository.deleteByAnimalId(animal_id);
+
+    response.sendStatus(204);
+  }
 }
 
 module.exports = new VaccineController();

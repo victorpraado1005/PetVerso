@@ -81,6 +81,15 @@ class ConsultasRepository {
 
     return deleteOP;
   }
+
+  async deleteByAnimalId(animalId){
+    const deleteOP = await db.query(`
+      DELETE FROM consultas
+      WHERE animal_id = $1
+    `, [ animalId ]);
+
+    return deleteOP;
+  }
 }
 
 module.exports = new ConsultasRepository();

@@ -81,6 +81,15 @@ class BanhosRepository {
 
     return deleteOP;
   }
+
+  async deleteByAnimalId(animalId){
+    const deleteOP = await db.query(`
+      DELETE FROM banhos
+      WHERE animal_id = $1
+    `, [ animalId ]);
+
+    return deleteOP;
+  }
 }
 
 module.exports = new BanhosRepository();

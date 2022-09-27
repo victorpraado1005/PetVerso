@@ -61,6 +61,14 @@ class MedicationsRepository {
     `, [ id ]);
     return deleteOp;
   }
+
+  async deleteByAnimalId(animalId){
+    const deleteOp = await db.query(`
+      DELETE FROM medication
+      WHERE animal_id = $1
+    `, [ animalId ]);
+    return deleteOp;
+  }
 }
 
 module.exports = new MedicationsRepository();

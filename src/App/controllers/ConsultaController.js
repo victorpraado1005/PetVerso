@@ -111,6 +111,13 @@ class ConsultaController {
 
     response.sendStatus(204);
   }
+
+  async deleteByAnimalId(request, response){
+    const { animal_id } = request.params;
+    await ConsultasRepository.deleteByAnimalId(animal_id);
+
+    response.sendStatus(204);
+  }
 }
 
 module.exports = new ConsultaController();

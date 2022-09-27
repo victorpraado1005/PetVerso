@@ -45,6 +45,8 @@ router.get('/consulta/:id', ConsultaController.show);
 router.post('/consulta', ConsultaController.store);
 router.put('/consulta/:id', ConsultaController.update);
 router.delete('/consulta/:id', ConsultaController.delete);
+// rota para deletar banhos relacionado a um animal
+router.delete('/animals/consulta/:animal_id', ConsultaController.deleteByAnimalId);
 
 //banhos
 router.get('/banho', BanhoController.index);
@@ -52,6 +54,8 @@ router.get('/banho/:id', BanhoController.show);
 router.post('/banho', BanhoController.store);
 router.put('/banho/:id', BanhoController.update);
 router.delete('/banho/:id', BanhoController.delete);
+// rota para deletar banhos relacionado a um animal
+router.delete('/animals/banho/:animal_id', BanhoController.deleteByAnimalId);
 
 //parks
 router.get('/park', ParkController.index);
@@ -64,6 +68,8 @@ router.get('/vaccines/:id', VaccineController.show);
 router.post('/vaccines', VaccineController.store);
 router.put('/vaccines/:vaccine_id', VaccineController.update);
 router.delete('/vaccines/:id', VaccineController.delete);
+// rota para deletar banhos relacionado a um animal
+router.delete('/animals/vaccines/:animal_id', VaccineController.deleteByAnimalId);
 
 //medications
 router.get('/medication', MedicationController.index);
@@ -71,6 +77,8 @@ router.get('/medication/:id', MedicationController.show);
 router.post('/medication', MedicationController.store);
 router.put('/medication/:medication_id', MedicationController.update);
 router.delete('/medication/:id', MedicationController.delete);
+// rota para deletar banhos relacionado a um animal
+router.delete('/animals/medication/:animal_id', MedicationController.deleteByAnimalId);
 
 //pedidos
 router.get('/pedidos', PedidoController.index);

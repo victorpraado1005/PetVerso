@@ -64,6 +64,14 @@ class VaccinesRepository {
     `, [ id ]);
     return deleteOp;
   }
+
+  async deleteByAnimalId(animalId){
+    const deleteOp = await db.query(`
+      DELETE FROM vaccines
+      WHERE animal_id = $1
+    `, [ animalId ]);
+    return deleteOp;
+  }
 }
 
 module.exports = new VaccinesRepository();
