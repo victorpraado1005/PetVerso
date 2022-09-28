@@ -14,14 +14,14 @@ class ConsultasRepository {
   }
 
   async findByAnimalId(id) {
-    const [ row ] = await db.query(`
+    const rows = await db.query(`
     SELECT consultas.data_consulta, consultas.hora_consulta, consultas.clinica, animal.name AS animal_name, users.name AS user_name
     FROM consultas
     LEFT JOIN animal ON animal.id = consultas.animal_id
     LEFT JOIN users ON users.id = consultas.users_id
     WHERE consultas.animal_id = $1
     `, [ id ]);
-    return row;
+    return rows;
   }
 
   async findByUser(users_id) {

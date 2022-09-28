@@ -11,13 +11,8 @@ class BanhoController {
 
   async showByAnimalId(request, response) {
     const { animal_id } = request.params;
-    const banho = await BanhosRepository.findByAnimalId(animal_id);
-
-    if (!banho) {
-      return response.status(404).json({error: 'Banho não encontrado'})
-    }
-
-    response.json(banho);
+    const banhos = await BanhosRepository.findByAnimalId(animal_id);
+    response.json(banhos);
   }
 
   async showBanhosByUser(request, response) {

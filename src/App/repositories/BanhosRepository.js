@@ -14,14 +14,14 @@ class BanhosRepository {
   }
 
   async findByAnimalId(id) {
-    const [ row ] = await db.query(`
+    const rows = await db.query(`
     SELECT banhos.data_banho, banhos.hora_banho, petshop, animal.name AS animal_name, users.name AS user_name
     FROM banhos
     LEFT JOIN animal ON animal.id = banhos.animal_id
     LEFT JOIN users ON users.id = banhos.users_id
     WHERE banhos.animal_id = $1
     `, [ id ]);
-    return row;
+    return rows;
   }
 
   async findByUser(users_id) {
