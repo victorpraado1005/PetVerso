@@ -41,7 +41,7 @@ router.get('/animals/medication/:animal_id', MedicationController.showByAnimalId
 
 //consultas
 router.get('/consulta', ConsultaController.index);
-router.get('/consulta/:id', ConsultaController.show);
+router.get('/consulta/:animal_id', ConsultaController.showConsultaByAnimalId);
 router.post('/consulta', ConsultaController.store);
 router.put('/consulta/:id', ConsultaController.update);
 router.delete('/consulta/:id', ConsultaController.delete);
@@ -50,7 +50,7 @@ router.delete('/animals/consulta/:animal_id', ConsultaController.deleteByAnimalI
 
 //banhos
 router.get('/banho', BanhoController.index);
-router.get('/banho/:id', BanhoController.show);
+router.get('/banho/:animal_id', BanhoController.showByAnimalId);
 router.post('/banho', BanhoController.store);
 router.put('/banho/:id', BanhoController.update);
 router.delete('/banho/:id', BanhoController.delete);

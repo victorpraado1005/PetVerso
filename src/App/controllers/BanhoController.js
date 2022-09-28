@@ -9,9 +9,9 @@ class BanhoController {
     response.json(banhos);
   }
 
-  async show(request, response) {
-    const { id } = request.params;
-    const banho = await BanhosRepository.findById(id);
+  async showByAnimalId(request, response) {
+    const { animal_id } = request.params;
+    const banho = await BanhosRepository.findByAnimalId(animal_id);
 
     if (!banho) {
       return response.status(404).json({error: 'Banho não encontrado'})

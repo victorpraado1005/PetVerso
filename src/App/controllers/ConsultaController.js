@@ -9,9 +9,9 @@ class ConsultaController {
     response.json(consultas);
   }
 
-  async show(request, response) {
-    const { id } = request.params;
-    const consulta = await ConsultasRepository.findById(id);
+  async showConsultaByAnimalId(request, response) {
+    const { animal_id } = request.params;
+    const consulta = await ConsultasRepository.findByAnimalId(animal_id);
 
     if (!consulta) {
       return response.status(404).json({error: 'Consulta not found'})
