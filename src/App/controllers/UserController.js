@@ -43,7 +43,7 @@ class UserController {
       return response.status(400).json({ error: 'Email is required!' });
     }
 
-    const { emailExists } = await UsersRepository.findByEmail(email);
+    const emailExists = await UsersRepository.findByEmail(email);
     if (!emailExists){
       return response.status(400).json({ error: 'This e-mail is already in use' });
     }
