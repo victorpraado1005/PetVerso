@@ -38,27 +38,27 @@ class UsersRepository {
   }
 
   async create({
-    name, email, phone, address, cep, city, estado, gender, date_of_birth
+    name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
   }) {
     const [ row ] = await db.query(`
-      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, date_of_birth)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING *
-    `, [name, email, phone, address, cep, city, estado, gender, date_of_birth]);
+    `, [name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante]);
 
     return row;
   }
 
   async update(id,{
-    name, email, phone, address, cep, city, estado, gender, date_of_birth
+    name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
   }) {
     const [ row ] = await db.query(`
       UPDATE users
       SET name = $1, email = $2, phone = $3, address = $4, cep = $5, city = $6,
-      estado = $7, gender = $8, date_of_birth = $9
-      WHERE id = $10
+      estado = $7, gender = $8, date_of_birth = $9, assinante = $10
+      WHERE id = $11
       RETURNING *
-    `, [ name, email, phone, address, cep, city, estado, gender, date_of_birth, id ]);
+    `, [ name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante, id ]);
 
     return row;
   }

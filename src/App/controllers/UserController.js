@@ -52,14 +52,6 @@ class UserController {
       return response.status(400).json({ error: 'Phone is required!' });
     }
 
-    if (!gender){
-      return response.status(400).json({ error: 'Gender is required!' });
-    }
-
-    if (!date_of_birth){
-      return response.status(400).json({ error: 'Date of birth is required!' });
-    }
-
     const contact = await UsersRepository.create({
       name, email, phone, address, cep, city, estado, gender, date_of_birth
     });
@@ -70,7 +62,7 @@ class UserController {
   async update(request, response) {
     const { id } = request.params;
     const {
-      name, email, phone, address, cep, city, estado, gender, date_of_birth
+      name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
     } = request.body;
 
     const userExists = await UsersRepository.findById(id);
@@ -90,12 +82,8 @@ class UserController {
       return response.status(400).json({ error: 'Phone is required!' });
     }
 
-    if (!gender){
-      return response.status(400).json({ error: 'Gender is required!' });
-    }
-
     const user = await UsersRepository.update(id, {
-      name, email, phone, address, cep, city, estado, gender, date_of_birth
+      name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
     });
 
     response.json(user);
