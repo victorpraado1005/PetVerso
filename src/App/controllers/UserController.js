@@ -44,7 +44,7 @@ class UserController {
     }
 
     const emailExists = await UsersRepository.findByEmail(email);
-    if (!emailExists){
+    if (emailExists.length > 0){
       return response.status(400).json({ error: 'This e-mail is already in use' });
     }
 
