@@ -38,13 +38,13 @@ class UsersRepository {
   }
 
   async create({
-    name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
+    name, email, phone, address, cep, city, estado, gender, assinante, password
   }) {
     const [ row ] = await db.query(`
-      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante)
+      INSERT INTO users(name, email, phone, address, cep, city, estado, gender, assinante, password)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING *
-    `, [name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante]);
+    `, [name, email, phone, address, cep, city, estado, gender, assinante, password]);
 
     return row;
   }

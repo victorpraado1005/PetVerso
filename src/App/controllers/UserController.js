@@ -32,7 +32,7 @@ class UserController {
   async store (request, response) {
     //Criar novo registro
     const {
-      name, email, phone, address, cep, city, estado, gender, date_of_birth
+      name, email, phone, address, cep, city, estado, gender, assinante, password
     } = request.body;
 
     if (!name) {
@@ -53,7 +53,7 @@ class UserController {
     }
 
     const contact = await UsersRepository.create({
-      name, email, phone, address, cep, city, estado, gender, date_of_birth
+      name, email, phone, address, cep, city, estado, gender, assinante, password
     });
 
     response.status(201).json(contact);
