@@ -5,8 +5,8 @@ const { request } = require('express');
 
 class BanhoController {
   async index(request, response) {
-    const banhos = await BanhosRepository.findAll();
-    response.json(banhos);
+    const banhoss = await BanhosRepository.findAll();
+    response.json(banhoss);
   }
 
   async showByAnimalId(request, response) {
