@@ -3,8 +3,8 @@ require('express-async-error');
 
 class UserController {
   async index(request, response) {
-    const contacts = await UsersRepository.findAll();
-    response.json(contacts);
+    const contact = await UsersRepository.findAll();
+    response.json(contact);
   }
 
   async show(request, response) {
