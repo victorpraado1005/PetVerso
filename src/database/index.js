@@ -3,9 +3,9 @@ const { Client } = require('pg');
 const client = new Client({
   host: 'petversodb.cqdlkeva8dsc.us-east-1.rds.amazonaws.com',
   port: 5432,
-  user: 'petverso',
+  user: 'postgres',
   password: 'sBY0EnDuDGhugoAkEPlrh',
-  database: 'petverso'
+  database: 'postgres'
 });
 
 // const client = new Client({
