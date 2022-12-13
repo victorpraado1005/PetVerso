@@ -1,9 +1,9 @@
 {
     "name": "PetVerso",
-    "version": "1",
+    "version": 2,
     "public": true,
     "build": {
-        "src": "api/index.js",
+        "src": "src/index.js",
         "use": "@vercel/node"
     },
     "routes": [
