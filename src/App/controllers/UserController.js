@@ -3,6 +3,7 @@ require("express-async-error");
 
 class UserController {
   async index(request, response) {
+    console.log('entrou no user controler')
     const contacts = await UsersRepository.findAll();
     response.json(contacts);
   }
