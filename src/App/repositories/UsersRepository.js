@@ -4,12 +4,10 @@ const db = require('../../database');
 
 class UsersRepository {
   async findAll() {
-    console.log('entrou no user repository')
     const rows = await db.query(`
     SELECT users.id, users.name, email, phone
     FROM users
     `);
-    console.log('passou da query')
     return rows;
   }
 
