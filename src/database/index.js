@@ -1,11 +1,11 @@
 const { Client } = require('pg');
 
 const client = new Client({
-  host: 'petversodb.cqdlkeva8dsc.us-east-1.rds.amazonaws.com',
-  port: 5432,
+  host: 'containers-us-west-200.railway.app',
+  port: 6571,
   user: 'postgres',
-  password: 'sBY0EnDuDGhugoAkEPlrh',
-  database: 'postgres'
+  password: 'JAMspPUCeVvGGoPvxlZN',
+  database: 'railway'
 });
 
 // const client = new Client({
