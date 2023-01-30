@@ -48,7 +48,6 @@ class UserController {
       assinante,
       password,
     } = request.body;
-
     if (!name) {
       return response.status(400).json({ error: "Name is required!" });
     }
@@ -59,12 +58,10 @@ class UserController {
 
     const emailExists = await UsersRepository.findByEmail(email);
     if (emailExists) {
-      const { emailExists } = await UsersRepository.findByEmail(email);
-      if (!emailExists) {
         return response
           .status(400)
           .json({ error: "This e-mail is already in use" });
-      }
+    }
 
       if (!phone) {
         return response.status(400).json({ error: "Phone is required!" });
@@ -85,7 +82,6 @@ class UserController {
 
       response.status(201).json(contact);
     }
-  }
 
   async update(request, response) {
     const { id } = request.params;
