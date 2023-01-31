@@ -58,3 +58,24 @@ create table medication(
 	animal_id UUID,
 	FOREIGN KEY(animal_id) REFERENCES animal(id)
 );
+
+create table pedidos(
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  data_pedido DATE NOT NULL,
+  loja VARCHAR,
+  valor_total VARCHAR,
+  status VARCHAR,
+  user_id UUID,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+)
+
+create table banhos(
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  data_banho DATE NOT NULL,
+  hora_banho TIME NOT NULL,
+  petshop VARCHAR,
+  animal_id UUID,
+  users_id UUID,
+  FOREIGN KEY(animal_id) REFERENCES animal(id),
+  FOREIGN KEY(users_id) REFERENCES users(id)
+)
