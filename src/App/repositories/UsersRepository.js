@@ -49,15 +49,28 @@ class UsersRepository {
   }
 
   async update(id,{
-    name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante
+    name, email, phone, address, cep, city, estado, gender, date_of_birth
   }) {
     const [ row ] = await db.query(`
       UPDATE users
       SET name = $1, email = $2, phone = $3, address = $4, cep = $5, city = $6,
-      estado = $7, gender = $8, date_of_birth = $9, assinante = $10
-      WHERE id = $11
+      estado = $7, gender = $8, date_of_birth = $9
+      WHERE id = $10
       RETURNING *
-    `, [ name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante, id ]);
+    `, [ name, email, phone, address, cep, city, estado, gender, date_of_birth, id ]);
+
+    return row;
+  }
+
+  async updateSubscription(id,{
+    assinante
+  }) {
+    const [ row ] = await db.query(`
+      UPDATE users
+      SET assinante = $1
+      WHERE id = $2
+      RETURNING *
+    `, [ assinante, id ]);
 
     return row;
   }

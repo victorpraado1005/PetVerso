@@ -21,6 +21,7 @@ router.get('/users/:id', UserController.show);
 router.post('/users', UserController.store);
 router.post('/users/login', UserController.login);
 router.put('/users/:id', UserController.update);
+router.put('/users/updateSubscription/:id', UserController.updateSubscription);
 
 //informações dos animais relacionados a um usuário
 router.get('/users/animals/:id', AnimalController.showAnimalsByParent);

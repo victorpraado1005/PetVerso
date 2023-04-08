@@ -95,7 +95,6 @@ class UserController {
       estado,
       gender,
       date_of_birth,
-      assinante,
     } = request.body;
 
     const userExists = await UsersRepository.findById(id);
@@ -125,12 +124,31 @@ class UserController {
       estado,
       gender,
       date_of_birth,
-      assinante,
+    });
+
+    response.json(user);
+  }
+
+  async updateSubscription(request, response) {
+    const { id } = request.params;
+    const {
+      assinante
+    } = request.body;
+
+    const userExists = await UsersRepository.findById(id);
+    if (!userExists) {
+      return response.status(400).json({ error: "User not found" });
+    }
+
+    const user = await UsersRepository.updateSubscription(id, {
+      assinante
     });
 
     response.json(user);
   }
 }
+
+
 
 // Singleton
 module.exports = new UserController();
