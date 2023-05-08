@@ -89,3 +89,30 @@ CREATE TABLE public.banhos (
 	CONSTRAINT banhos_animal_id_fkey FOREIGN KEY (animal_id) REFERENCES public.animal(id),
 	CONSTRAINT banhos_users_id_fkey FOREIGN KEY (users_id) REFERENCES public.users(id)
 );
+
+create table stores (
+	id uuid not null default uuid_generate_v4(),
+	name varchar not null,
+	cnpj varchar not null,
+	address varchar not null,
+	city varchar not null,
+	city_area varchar not null,
+	CONSTRAINT stores_id_key UNIQUE (id)
+)
+
+create table products (
+	id uuid not null default uuid_generate_v4(),
+	name varchar not null,
+	price decimal(10,2) not null,
+	quantity int not null,
+	store_id uuid,
+	CONSTRAINT product_store_id FOREIGN KEY (store_id) REFERENCES public.stores(id)
+)
+
+create table coupon (
+	id uuid not null default uuid_generate_v4(),
+	name varchar not null,
+	discount int not null,
+	store_id uuid,
+	CONSTRAINT coupon_store_id FOREIGN KEY (store_id) REFERENCES public.stores(id)
+)

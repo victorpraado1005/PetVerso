@@ -8,6 +8,7 @@ const ParkController = require('./App/controllers/ParkController');
 const VaccineController = require('./App/controllers/VaccineController');
 const MedicationController = require('./App/controllers/MedicationController');
 const PedidoController = require('./App/controllers/PedidoController');
+const StoreController = require('./App/controllers/StoreController');
 
 const router = Router();
 
@@ -85,5 +86,14 @@ router.delete('/animals/medication/:animal_id', MedicationController.deleteByAni
 router.get('/pedidos', PedidoController.index);
 router.get('/pedidos/:id', PedidoController.show);
 router.post('/pedidos', PedidoController.store);
+
+//stores
+router.get('/store', StoreController.index);
+router.get('/store/:store_id', StoreController.showStoreById);
+router.post('/store', StoreController.store);
+
+//products
+
+//coupons
 
 module.exports = router;
