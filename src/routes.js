@@ -9,6 +9,7 @@ const VaccineController = require('./App/controllers/VaccineController');
 const MedicationController = require('./App/controllers/MedicationController');
 const PedidoController = require('./App/controllers/PedidoController');
 const StoreController = require('./App/controllers/StoreController');
+const ProductController = require('./App/controllers/ProductController');
 
 const router = Router();
 
@@ -93,6 +94,7 @@ router.get('/store/:store_id', StoreController.showStoreById);
 router.post('/store', StoreController.store);
 
 //products
+router.post('/product', ProductController.store);
 
 //coupons
 
