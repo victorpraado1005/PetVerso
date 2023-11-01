@@ -1,5 +1,6 @@
 const UsersRepository = require("../repositories/UsersRepository");
 require("express-async-error");
+var bcrypt = require("bcryptjs");
 
 class UserController {
   async index(request, response) {
@@ -20,18 +21,24 @@ class UserController {
 
   async login(request, response) {
     const { email, password } = request.body;
-    const user = await UsersRepository.findUserByEmailAndPassword(
-      email,
-      password
-    );
+
+    const user = await UsersRepository.findByEmail(email);
 
     if (!user) {
       return response
         .status(404)
-        .json({ error: "E-mail or password are incorrect" });
+        .json({ error: "E-mail are incorrect" });
     }
 
-    response.json(user);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return response
+        .status(404)
+        .json({ error: "Password are incorrect" });
+    }
+
+    response.json({ id: user.id, name: user.name });
   }
 
   async store(request, response) {
@@ -67,6 +74,8 @@ class UserController {
         return response.status(400).json({ error: "Phone is required!" });
       }
 
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const contact = await UsersRepository.create({
         name,
         email,
@@ -77,7 +86,7 @@ class UserController {
         estado,
         gender,
         assinante,
-        password,
+        hashedPassword,
       });
 
       response.status(201).json(contact);
@@ -147,8 +156,6 @@ class UserController {
     response.json(user);
   }
 }
-
-
 
 // Singleton
 module.exports = new UserController();

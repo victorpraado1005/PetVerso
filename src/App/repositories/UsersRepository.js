@@ -21,7 +21,7 @@ class UsersRepository {
 
   async findByEmail(email){
     const [ row ] = await db.query(`
-      SELECT email
+      SELECT id, name, email, password
       FROM users
       WHERE email = $1
     `, [ email ]);
@@ -38,13 +38,13 @@ class UsersRepository {
   }
 
   async create({
-    name, email, phone, address, cep, city, estado, gender, assinante, password
+    name, email, phone, address, cep, city, estado, gender, assinante, hashedPassword
   }) {
     const [ row ] = await db.query(`
       INSERT INTO users(name, email, phone, address, cep, city, estado, gender, assinante, password)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       RETURNING *
-    `, [name, email, phone, address, cep, city, estado, gender, assinante, password]);
+    `, [name, email, phone, address, cep, city, estado, gender, assinante, hashedPassword]);
     return row;
   }
 
