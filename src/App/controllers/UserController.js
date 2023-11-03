@@ -1,6 +1,7 @@
 const UsersRepository = require("../repositories/UsersRepository");
 require("express-async-error");
 var bcrypt = require("bcryptjs");
+var jwt = require('jsonwebtoken');
 
 class UserController {
   async index(request, response) {
@@ -38,7 +39,11 @@ class UserController {
         .json({ error: "Password are incorrect" });
     }
 
-    response.json({ id: user.id, name: user.name });
+    const accessToken = await jwt.sign(
+      { sub: user.id }, process.env.JWT_SECRET
+    );
+
+    response.json({ id: user.id, name: user.name, accessToken: accessToken });
   }
 
   async store(request, response) {
@@ -89,7 +94,11 @@ class UserController {
         hashedPassword,
       });
 
-      response.status(201).json(contact);
+      const accessToken = await jwt.sign(
+        { sub: contact.id }, process.env.JWT_SECRET
+      );
+
+      response.status(201).json({ id: contact.id, name: contact.name, accessToken: accessToken });
     }
 
   async update(request, response) {
