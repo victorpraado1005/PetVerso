@@ -14,7 +14,7 @@ const ProductController = require('./App/controllers/ProductController');
 const router = Router();
 
 router.get('/', function (req, res){
-  res.send("Olá, tamo no ar!");
+  res.send("Olá, estamos no ar!");
 });
 
 //users
