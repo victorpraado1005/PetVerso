@@ -15,7 +15,7 @@ const router = Router();
 
 router.get('/', function (req, res){
   res.send("Olá, estamos no ar!");
-});
+ });
 
 //users
 router.get('/users', UserController.index);
