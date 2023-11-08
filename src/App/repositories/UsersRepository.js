@@ -13,7 +13,7 @@ class UsersRepository {
 
   async findById(id) {
     const [ row ] = await db.query(`
-      SELECT * FROM users
+      SELECT id, name, email, phone, address, cep, city, estado, gender, date_of_birth, assinante FROM users
       WHERE id = $1
     `, [ id ]);
     return row;
@@ -25,15 +25,6 @@ class UsersRepository {
       FROM users
       WHERE email = $1
     `, [ email ]);
-    return row;
-  }
-
-  async findUserByEmailAndPassword(email, password) {
-    const [ row ] = await db.query(`
-      SELECT id, name
-      FROM users
-      WHERE email = $1 AND password = $2
-    `, [ email, password ]);
     return row;
   }
 

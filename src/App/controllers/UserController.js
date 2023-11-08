@@ -46,6 +46,18 @@ class UserController {
     response.json({ id: user.id, name: user.name, accessToken: accessToken });
   }
 
+  async me(request, response) {
+    const token = request.headers.authorization;
+
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user_id = payload.sub;
+
+    const user = await UsersRepository.findById(user_id);
+
+    response.json( { user } );
+  }
+
   async store(request, response) {
     //Criar novo registro
     const {
