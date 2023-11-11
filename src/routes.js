@@ -20,7 +20,7 @@ router.get('/', function (req, res){
 
 //users
 router.get('/users', isAuth, UserController.index);
-router.get('/users/me', UserController.me);
+router.get('/users/me', isAuth, UserController.me);
 router.get('/users/:id', isAuth, UserController.show);
 router.post('/users', UserController.store);
 router.post('/users/login', UserController.login);
