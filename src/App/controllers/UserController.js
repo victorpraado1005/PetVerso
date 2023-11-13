@@ -43,13 +43,15 @@ class UserController {
       { sub: user.id }, process.env.JWT_SECRET
     );
 
-    response.json({ id: user.id, name: user.name, accessToken: accessToken });
+    response.json({ accessToken: accessToken });
   }
 
   async me(request, response) {
     const token = request.headers.authorization;
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const accessToken = token.split(' ')[1];
+
+    const payload = jwt.verify(accessToken, process.env.JWT_SECRET);
 
     const user_id = payload.sub;
 
@@ -110,7 +112,7 @@ class UserController {
         { sub: contact.id }, process.env.JWT_SECRET
       );
 
-      response.status(201).json({ id: contact.id, name: contact.name, accessToken: accessToken });
+      response.status(201).json({ accessToken: accessToken });
     }
 
   async update(request, response) {
@@ -156,7 +158,7 @@ class UserController {
       date_of_birth,
     });
 
-    response.json(user);
+    response.status(201).json({ success: "Contato atualizado com sucesso!" });
   }
 
   async updateSubscription(request, response) {
@@ -174,7 +176,7 @@ class UserController {
       assinante
     });
 
-    response.json(user);
+    response.status(201).json({ success: "Contato atualizado com sucesso!" });
   }
 }
 

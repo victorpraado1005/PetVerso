@@ -6,13 +6,13 @@ exports.isAuth = async (request, response, next) => {
   }
 
   const token = request.headers.authorization;
+  const accessToken = token.split(' ')[1];
 
-    jwt.verify(token, process.env.JWT_SECRET, function(err, res) {
+  jwt.verify(accessToken, process.env.JWT_SECRET, function(err, res) {
       if (err) {
         return response.status(401).json({ error: 'Invalid Access Token' });
       } else {
         next();
       }
     });
-
 }
