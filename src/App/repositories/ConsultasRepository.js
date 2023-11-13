@@ -26,7 +26,7 @@ class ConsultasRepository {
 
   async findByUser(users_id) {
     const rows = await db.query(`
-      SELECT data_consulta, consultas.hora_consulta, clinica, animal.name AS animal_name, users.name AS user_name
+      SELECT consultas.id, data_consulta, consultas.hora_consulta, clinica, animal.name AS animal_name, users.name AS user_name
       FROM consultas
       LEFT JOIN animal ON animal.id = consultas.animal_id
       LEFT JOIN users ON users.id = consultas.users_id
