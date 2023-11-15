@@ -109,7 +109,7 @@ class UserController {
       });
 
       const accessToken = await jwt.sign(
-        { sub: user.id }, process.env.JWT_SECRET, { expiresIn: '1 day' }
+        { sub: contact.id }, process.env.JWT_SECRET, { expiresIn: '1 day' }
       );
 
       response.status(201).json({ accessToken: accessToken });
