@@ -16,4 +16,4 @@ app.use(cors);
 app.use(routes);
 app.use(erroHandler);
 
-app.listen(port, () => console.log('Servidor rodando'));
+app.listen(port, () => console.log('Servidor rodando...'));
