@@ -15,6 +15,7 @@ const { isAuth } = require('./App/middlewares/isAuth');
 const router = Router();
 
 router.get('/', function (req, res){
+  console.log('chegou uma requisicao');
   res.send("Servidor Rodando...");
  });
 
